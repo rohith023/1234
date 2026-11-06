@@ -1,0 +1,330 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Student Dashboard'),
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+        ),
+
+        body: Column(
+          children: [
+            // Container
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: const Column(
+                children: [
+                  Icon(Icons.person, size: 50),
+                  Text('Student Profile'),
+                  Text('Computer Science and Engineering'),
+                ],
+              ),
+            ),
+
+            // Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Icon(Icons.home),
+                Icon(Icons.person),
+                Icon(Icons.settings),
+              ],
+            ),
+
+            // Expanded and ListView
+            Expanded(
+              child: ListView(
+                children: const [
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.book),
+                      title: Text('Flutter'),
+                    ),
+                  ),
+
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.cloud),
+                      title: Text('Cloud Computing'),
+                    ),
+                  ),
+
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.code),
+                      title: Text('Programming'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         Code:2
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Responsive Dashboard'),
+          centerTitle: true,
+        ),
+
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+
+            // MOBILE LAYOUT
+            if (constraints.maxWidth < 600) {
+              return Column(
+                children: [
+                  const Text(
+                    'Student Dashboard',
+                    style: TextStyle(fontSize: 24),
+                  ),
+
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text('Students'),
+                    ),
+                  ),
+
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.book),
+                      title: Text('Courses'),
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            // DESKTOP / TABLET LAYOUT
+            return Row(
+              children: [
+                Expanded(
+                  child: Card(
+                    child: ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text('Students'),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: Card(
+                    child: ListTile(
+                      leading: Icon(Icons.book),
+                      title: Text('Courses'),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code3
+
+  
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: StudentForm(),
+  ));
+}
+
+class StudentForm extends StatelessWidget {
+  StudentForm({super.key});
+
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Student Registration'),
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+
+        child: Form(
+          key: formKey,
+
+          child: Column(
+            children: [
+
+              // Student Name
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Student Name',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter student name';
+                  }
+                  return null;
+                },
+              ),
+              // Email
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter email';
+                  }
+                  return null;
+                },
+              ),
+              // Password
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter password';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              // Submit Button
+              ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Form submitted successfully'),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Code 4
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MediaApp(),
+    ),
+  );
+}
+
+class MediaApp extends StatelessWidget {
+  MediaApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Media Gallery'),
+        backgroundColor: Colors.blue,
+      ),
+
+      body: Column(
+        children: [
+          const Text(
+            'Flutter Image',
+            style: TextStyle(fontSize: 22),
+          ),
+
+          Image.asset(
+            'assets/images/flutter.png',
+            height: 150,
+          ),
+
+          const Text(
+            'Image Gallery',
+            style: TextStyle(fontSize: 22),
+          ),
+
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              children: [
+                Image.asset('assets/images/flutter.png'),
+                Image.asset('assets/images/flutter.png'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
